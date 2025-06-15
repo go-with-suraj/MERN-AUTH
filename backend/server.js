@@ -14,7 +14,14 @@ connectDB();
 
 const app = express();
 
-app.use(cors());
+const corsOptions = {
+  origin: process.env.NODE_ENV === 'production'
+  ? 'https://MERN-AUTH.onrender.com'
+  : 'http://localhost:8000',
+  Credentials: true
+}
+
+app.use(cors(corsOptions));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
